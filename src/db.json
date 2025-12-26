@@ -1,0 +1,72 @@
+{
+	"products": [
+		{
+			"id": "001",
+			"image_url": "https://pngicon.ru/file/uploads/sova-s-pismom.png",
+			"name": "Повербанк Про Макс Ультра",
+			"description": "Невероятно вместительный",
+			"price": 2000,
+			"count": 50,
+			"category_id": 3
+		},
+		{
+			"id": "002",
+			"image_url": "https://pngicon.ru/file/uploads/ikonka-korova-128x128.png",
+			"name": "Телевизор супер вижион про",
+			"description": "Отличная матрица",
+			"price": 20000,
+			"count": 10,
+			"category_id": 2
+		},
+		{
+			"id": "003",
+			"image_url": "https://pngicon.ru/file/uploads/ikonka-korova-128x128.png",
+			"name": "Кофемашина турбо айс латте",
+			"description": "Наивкуснейший коффе",
+			"price": 40000,
+			"count": 18,
+			"category_id": 1
+		}
+	],
+	"users": [
+		{
+			"id": "001",
+			"login": "Kirill",
+			"password": "qwerty123",
+			"role_id": 0
+		}
+	],
+	"roles": [
+		{
+			"id": 0,
+			"name": "Администратор"
+		},
+		{
+			"id": 1,
+			"name": "Модератор"
+		},
+		{
+			"id": 2,
+			"name": "Гость"
+		}
+	],
+	"categories": [
+		{
+			"id": 0,
+			"name": "Смартфоны"
+		},
+		{
+			"id": 1,
+			"name": "Кофемашины"
+		},
+		{
+			"id": 2,
+			"name": "Телевизоры"
+		},
+		{
+			"id": 3,
+			"name": "Повербанки"
+		}
+	],
+	"sessions": []
+}

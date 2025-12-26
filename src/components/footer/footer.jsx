@@ -25,8 +25,9 @@ export const Footer = styled(FooterContainer)`
 	align-items: center;
 	position: absolute;
 	bottom: 0;
+	left: 0;
 	border-top: 3px solid #8a1f1f;
-	height: 120px;
+	height: 100px;
 	width: 100%;
 	background-color: #fdf3e2;
 	.footer-telephone {
