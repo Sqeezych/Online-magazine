@@ -1,8 +1,24 @@
 import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { authFormSchema } from './schema';
 import { Link } from 'react-router-dom';
+import { server } from '../../bff/bff';
 import styled from 'styled-components';
 
-const AuthInput = styled.input`
+const Form = styled.form`
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+`;
+const Title = styled.h2`
+	font-weight: 400;
+	font-size: 21px;
+`;
+const FormInput = styled.input`
 	font-size: 21px;
 	width: 270px;
 	height: 40px;
@@ -13,8 +29,7 @@ const AuthInput = styled.input`
 	padding: 0 10px;
 	text-align: center;
 `;
-
-const AuthButton = styled.button`
+const FormButton = styled.button`
 	width: 270px;
 	height: 50px;
 	font-size: 21px;
@@ -22,42 +37,82 @@ const AuthButton = styled.button`
 	border-radius: 10px;
 	background-color: #fdf3e2;
 `;
+const ErrorContainer = styled.div`
+	background-color: #f8abab;
+	border: 1px solid #000;
+	border-radius: 10px;
+
+	position: absolute;
+	top: 320px;
+	left: 0;
+	width: 100%;
+	min-height: 60px;
+	padding: 20px 20px;
+
+	font-size: 17px;
+	text-align: center;
+`;
 
 const AuthorizeContainer = ({ className }) => {
-	const [login, setLogin] = useState('');
-	const [password, setPassword] = useState('');
+	const [serverError, setServerError] = useState(null);
 
-	const onChangeLogin = ({ target }) => {
-		setLogin(target.value);
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm({
+		defaultValues: {
+			login: '',
+			password: '',
+		},
+		resolver: yupResolver(authFormSchema),
+	});
+
+	const onSubmit = ({ login, password }) => {
+		console.log('Form accepted');
+		server.authorize(login, password).then(({ error }) => {
+			if (error) {
+				setServerError(error);
+			} else {
+				setServerError(null);
+			}
+		});
 	};
 
-	const onChangePassword = ({ target }) => {
-		setPassword(target.value);
-	};
+	const onChangeForm = () => setServerError(null);
+
+	const validationError = errors?.login?.message || errors?.password?.message;
+	const errorMessage = validationError || serverError;
 
 	return (
 		<div className={className}>
-			<div className="authorize-title">Авторизация</div>
-			<div className="authorize-inputs">
-				<AuthInput
+			<Form onSubmit={handleSubmit(onSubmit)} onChange={onChangeForm}>
+				<Title>Авторизация</Title>
+				<FormInput
 					className="authorize-inputs-login"
 					type="text"
 					placeholder="Логин"
-					value={login}
-					onChange={onChangeLogin}
+					{...register('login')}
 				/>
-				<AuthInput
+				<FormInput
 					className="authorize-inputs-password"
-					type="text"
+					type="password"
 					placeholder="Пароль"
-					value={password}
-					onChange={onChangePassword}
+					{...register('password')}
 				/>
-			</div>
-			<AuthButton className="content-filter-button">Войти</AuthButton>
-			<Link to="/register">
-				<div className="authorize-to-register">Зарегистрироваться</div>
-			</Link>
+				<FormButton
+					className="content-filter-button"
+					type="submit"
+					disabled={validationError}
+				>
+					Войти
+				</FormButton>
+
+				<Link to="/register" className="authorize-to-register">
+					Зарегистрироваться
+				</Link>
+			</Form>
+			{!errorMessage ? null : <ErrorContainer>{errorMessage}</ErrorContainer>}
 		</div>
 	);
 };
@@ -77,21 +132,8 @@ export const Authorize = styled(AuthorizeContainer)`
 	left: 50%;
 	transform: translateX(-50%) translateY(-50%);
 
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: space-between;
-
-	& .authorize-title {
-		font-size: 21px;
-	}
-
 	& .authorize-to-register {
 		font-size: 18px;
 		text-decoration: underline;
-	}
-
-	& .authorize-inputs-password {
-		margin-top: 10px;
 	}
 `;

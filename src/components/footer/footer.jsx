@@ -21,14 +21,13 @@ const FooterContainer = ({ className }) => {
 
 export const Footer = styled(FooterContainer)`
 	display: flex;
-	justify-content: flex-left;
 	align-items: center;
 	position: absolute;
 	bottom: 0;
 	left: 0;
-	border-top: 3px solid #8a1f1f;
 	height: 100px;
 	width: 100%;
+	border-top: 3px solid #8a1f1f;
 	background-color: #fdf3e2;
 	.footer-telephone {
 		margin-bottom: 10px;

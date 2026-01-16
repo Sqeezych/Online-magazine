@@ -1,7 +1,11 @@
-import { useState } from 'react';
+// import { server } from '../../bff';
 import styled from 'styled-components';
 
-const RegInput = styled.input`
+const Title = styled.h2`
+	font-weight: 400;
+	font-size: 21px;
+`;
+const FormInput = styled.input`
 	font-size: 21px;
 	width: 270px;
 	height: 40px;
@@ -12,8 +16,7 @@ const RegInput = styled.input`
 	padding: 0 10px;
 	text-align: center;
 `;
-
-const RegButton = styled.button`
+const FormButton = styled.button`
 	width: 270px;
 	height: 50px;
 	font-size: 21px;
@@ -23,49 +26,26 @@ const RegButton = styled.button`
 `;
 
 const RegisterContainer = ({ className }) => {
-	const [login, setLogin] = useState('');
-	const [password, setPassword] = useState('');
-	const [confirmPassword, setConfirmPassword] = useState('');
-
-	const onChangeLogin = ({ target }) => {
-		setLogin(target.value);
-	};
-
-	const onChangePassword = ({ target }) => {
-		setPassword(target.value);
-	};
-
-	const onChangeConfirmPassword = ({ target }) => {
-		setConfirmPassword(target.value);
-	};
-
+	const onSubmit = { login, password };
 	return (
 		<div className={className}>
-			<div className="register-title">Регистрация</div>
-			<div className="register-inputs">
-				<RegInput
-					className="register-inputs-login"
-					type="text"
-					placeholder="Логин"
-					value={login}
-					onChange={onChangeLogin}
-				/>
-				<RegInput
-					className="register-inputs-password"
-					type="text"
-					placeholder="Пароль"
-					value={password}
-					onChange={onChangePassword}
-				/>
-				<RegInput
-					className="register-inputs-confirm-password"
-					type="text"
-					placeholder="Повторите пароль"
-					value={confirmPassword}
-					onChange={onChangeConfirmPassword}
-				/>
-			</div>
-			<RegButton className="content-filter-button">Зарегистрироваться</RegButton>
+			<Title>Регистрация</Title>
+			<FormInput
+				className="register-inputs-login"
+				type="text"
+				placeholder="Логин"
+			/>
+			<FormInput
+				className="register-inputs-password"
+				type="password"
+				placeholder="Пароль"
+			/>
+			<FormInput
+				className="register-inputs-confirm-password"
+				type="password"
+				placeholder="Повторите пароль"
+			/>
+			<FormButton className="content-filter-button">Зарегистрироваться</FormButton>
 		</div>
 	);
 };
@@ -90,16 +70,8 @@ export const Register = styled(RegisterContainer)`
 	align-items: center;
 	justify-content: space-between;
 
-	& .register-title {
-		font-size: 21px;
-	}
-
 	& .register-to-register {
 		font-size: 18px;
 		text-decoration: underline;
-	}
-
-	& .register-inputs-password {
-		margin: 10px 0;
 	}
 `;

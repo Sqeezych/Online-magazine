@@ -26,6 +26,15 @@
 			"price": 40000,
 			"count": 18,
 			"category_id": 1
+		},
+		{
+			"id": "004",
+			"image_url": "https://pngicon.ru/file/uploads/ikonka-korova-128x128.png",
+			"name": "Кофемашина турбо айс латте",
+			"description": "Наивкуснейший коффе",
+			"price": 40000,
+			"count": 18,
+			"category_id": 1
 		}
 	],
 	"users": [
@@ -33,6 +42,7 @@
 			"id": "001",
 			"login": "Kirill",
 			"password": "qwerty123",
+			"regirested_at": "",
 			"role_id": 0
 		}
 	],
@@ -47,6 +57,10 @@
 		},
 		{
 			"id": 2,
+			"name": "Покупатель"
+		},
+		{
+			"id": 3,
 			"name": "Гость"
 		}
 	],

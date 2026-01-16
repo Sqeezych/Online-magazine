@@ -47,6 +47,8 @@ const MainPageContainer = ({ className }) => {
 };
 
 export const MainPage = styled(MainPageContainer)`
+	margin-bottom: 40px;
+
 	& .content {
 		display: flex;
 		margin-top: 50px;

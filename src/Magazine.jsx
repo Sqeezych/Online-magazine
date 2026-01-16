@@ -7,7 +7,7 @@ const AppColumn = styled.div`
 	position: relative;
 	padding: 150px 50px 100px 50px;
 	margin: 0 auto;
-	height: 100%;
+	min-height: 100%;
 	width: 1000px;
 	background-color: #faf6f0;
 `;
@@ -21,6 +21,7 @@ export const Magazine = () => {
 				<Route path="/authorize" element={<Authorize />} />
 				<Route path="/register" element={<Register />} />
 				<Route path="/product/:id" element={<Product />} />
+				<Route path="*" element={<div>Ошибка</div>} />
 			</Routes>
 			<Footer />
 		</AppColumn>
