@@ -1,22 +1,31 @@
 import { Link, useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { selectUser } from '../../selectors';
 import { Icon } from '../icon/icon.jsx';
-import { Button } from '../button/button.jsx';
+import { AboutUser, EnterButton } from './components';
 import styled from 'styled-components';
+
+const ToMainPageDiv = styled.div`
+	position: absolute;
+	left: 50px;
+	top: 120px;
+	font-size: 14px;
+	text-decoration: underline;
+`;
 
 const HeaderContainer = ({ className }) => {
 	const location = useLocation();
+	const user = useSelector(selectUser);
 
 	return (
 		<div className={className}>
 			<div className="header-buttons">
 				<Icon id="fa-shopping-cart" size="40px" inactive={false} />
-				<Link to="/authorize">
-					<Button>Войти/регистрация</Button>
-				</Link>
+				{user.session ? <AboutUser user={user} /> : <EnterButton />}
 			</div>
 			{location.pathname !== '/' ? (
 				<Link to="/">
-					<div className="to-main-page">На главную</div>
+					<ToMainPageDiv>На главную</ToMainPageDiv>
 				</Link>
 			) : null}
 		</div>
@@ -37,13 +46,5 @@ export const Header = styled(HeaderContainer)`
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-	}
-
-	& .to-main-page {
-		position: absolute;
-		left: 50px;
-		top: 120px;
-		font-size: 14px;
-		text-decoration: underline;
 	}
 `;

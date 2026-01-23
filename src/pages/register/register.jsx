@@ -1,7 +1,7 @@
 // import { server } from '../../bff';
 import styled from 'styled-components';
 
-const Title = styled.h2`
+const FormTitle = styled.h2`
 	font-weight: 400;
 	font-size: 21px;
 `;
@@ -27,9 +27,10 @@ const FormButton = styled.button`
 
 const RegisterContainer = ({ className }) => {
 	const onSubmit = { login, password };
+
 	return (
 		<div className={className}>
-			<Title>Регистрация</Title>
+			<FormTitle>Регистрация</FormTitle>
 			<FormInput
 				className="register-inputs-login"
 				type="text"

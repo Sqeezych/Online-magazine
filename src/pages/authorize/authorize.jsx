@@ -1,8 +1,10 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
+import { Link, useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { setUser } from '../../actions';
 import { authFormSchema } from './schema';
-import { Link } from 'react-router-dom';
 import { server } from '../../bff/bff';
 import styled from 'styled-components';
 
@@ -14,7 +16,7 @@ const Form = styled.form`
 	align-items: center;
 	justify-content: space-between;
 `;
-const Title = styled.h2`
+const FormTitle = styled.h2`
 	font-weight: 400;
 	font-size: 21px;
 `;
@@ -68,13 +70,17 @@ const AuthorizeContainer = ({ className }) => {
 		resolver: yupResolver(authFormSchema),
 	});
 
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+
 	const onSubmit = ({ login, password }) => {
-		console.log('Form accepted');
-		server.authorize(login, password).then(({ error }) => {
+		server.authorize(login, password).then(({ error, res }) => {
 			if (error) {
 				setServerError(error);
 			} else {
 				setServerError(null);
+				dispatch(setUser(res));
+				navigate('/');
 			}
 		});
 	};
@@ -87,7 +93,7 @@ const AuthorizeContainer = ({ className }) => {
 	return (
 		<div className={className}>
 			<Form onSubmit={handleSubmit(onSubmit)} onChange={onChangeForm}>
-				<Title>Авторизация</Title>
+				<FormTitle>Авторизация</FormTitle>
 				<FormInput
 					className="authorize-inputs-login"
 					type="text"
