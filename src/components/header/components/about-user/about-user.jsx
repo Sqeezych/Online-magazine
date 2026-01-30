@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { Icon } from '../../../icon/icon.jsx';
-import { LOGOUT } from '../../../../actions';
+import { logout } from '../../../../actions';
 import styled from 'styled-components';
 
 const AboutUserContainer = ({ className, user }) => {
@@ -15,7 +15,7 @@ const AboutUserContainer = ({ className, user }) => {
 	};
 
 	function onClick() {
-		dispatch(LOGOUT);
+		dispatch(logout(user.session));
 	}
 
 	return (

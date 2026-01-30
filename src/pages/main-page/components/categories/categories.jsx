@@ -38,6 +38,8 @@ export const Categories = styled(CategoriesContainer)`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+
+	height: fit-content;
 	padding: 30px 20px;
 	border: 1px solid #000;
 	border-radius: 20px;
@@ -53,7 +55,7 @@ export const Categories = styled(CategoriesContainer)`
 	}
 
 	& .categories-button {
-		margin-top: 40px;
+		margin-top: 30px;
 		font-size: 18px;
 	}
 `;

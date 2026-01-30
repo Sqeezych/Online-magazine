@@ -1,86 +1,128 @@
 {
-	"products": [
-		{
-			"id": "001",
-			"image_url": "https://pngicon.ru/file/uploads/sova-s-pismom.png",
-			"name": "Повербанк Про Макс Ультра",
-			"description": "Невероятно вместительный",
-			"price": 2000,
-			"count": 50,
-			"category_id": 3
-		},
-		{
-			"id": "002",
-			"image_url": "https://pngicon.ru/file/uploads/ikonka-korova-128x128.png",
-			"name": "Телевизор супер вижион про",
-			"description": "Отличная матрица",
-			"price": 20000,
-			"count": 10,
-			"category_id": 2
-		},
-		{
-			"id": "003",
-			"image_url": "https://pngicon.ru/file/uploads/ikonka-korova-128x128.png",
-			"name": "Кофемашина турбо айс латте",
-			"description": "Наивкуснейший коффе",
-			"price": 40000,
-			"count": 18,
-			"category_id": 1
-		},
-		{
-			"id": "004",
-			"image_url": "https://pngicon.ru/file/uploads/ikonka-korova-128x128.png",
-			"name": "Кофемашина турбо айс латте",
-			"description": "Наивкуснейший коффе",
-			"price": 40000,
-			"count": 18,
-			"category_id": 1
-		}
-	],
-	"users": [
-		{
-			"id": "001",
-			"login": "Kirill",
-			"password": "qwerty123",
-			"regirested_at": "",
-			"role_id": 0
-		}
-	],
-	"roles": [
-		{
-			"id": 0,
-			"name": "Администратор"
-		},
-		{
-			"id": 1,
-			"name": "Модератор"
-		},
-		{
-			"id": 2,
-			"name": "Покупатель"
-		},
-		{
-			"id": 3,
-			"name": "Гость"
-		}
-	],
-	"categories": [
-		{
-			"id": 0,
-			"name": "Смартфоны"
-		},
-		{
-			"id": 1,
-			"name": "Кофемашины"
-		},
-		{
-			"id": 2,
-			"name": "Телевизоры"
-		},
-		{
-			"id": 3,
-			"name": "Повербанки"
-		}
-	],
-	"sessions": []
+  "products": [
+    {
+      "id": "001",
+      "image_url": "https://pngicon.ru/file/uploads/sova-s-pismom.png",
+      "name": "Повербанк Про Макс Ультра",
+      "description": "Невероятно вместительный",
+      "price": 2000,
+      "count": 50,
+      "category_id": 3
+    },
+    {
+      "id": "002",
+      "image_url": "https://pngicon.ru/file/uploads/ikonka-korova-128x128.png",
+      "name": "Телевизор супер вижион про",
+      "description": "Отличная матрица",
+      "price": 20000,
+      "count": 10,
+      "category_id": 2
+    },
+    {
+      "id": "003",
+      "image_url": "https://pngicon.ru/file/uploads/ikonka-korova-128x128.png",
+      "name": "Кофемашина турбо айс латте",
+      "description": "Наивкуснейший коффе",
+      "price": 40000,
+      "count": 18,
+      "category_id": 1
+    },
+    {
+      "id": "004",
+      "image_url": "https://pngicon.ru/file/uploads/ikonka-korova-128x128.png",
+      "name": "Кофемашина турбо айс латте",
+      "description": "Наивкуснейший коффе",
+      "price": 40000,
+      "count": 18,
+      "category_id": 1
+    }
+  ],
+  "users": [
+    {
+      "login": "Kirill",
+      "password": "qwerty123",
+      "regirested_at": "2026-01-20 10:05",
+      "role_id": 0,
+      "id": "001"
+    },
+    {
+      "login": "Kirill1",
+      "password": "qwerty123",
+      "regirested_at": "2026-01-30 09:39",
+      "role_id": 2,
+      "id": "e4rYtj7"
+    },
+    {
+      "login": "ivan",
+      "password": "qwerty",
+      "regirested_at": "2026-01-30 09:50",
+      "role_id": 2,
+      "id": "mwG65YQ"
+    },
+    {
+      "login": "ivan3",
+      "password": "qwerty",
+      "regirested_at": "2026-01-30 09:52",
+      "role_id": 2,
+      "id": "1flYT7T"
+    },
+    {
+      "login": "ascavasv",
+      "password": "qwerty",
+      "regirested_at": "2026-01-30 09:56",
+      "role_id": 2,
+      "id": "p_UAfZw"
+    },
+    {
+      "login": "asavavasv",
+      "password": "qwerty",
+      "regirested_at": "2026-01-30 09:57",
+      "role_id": 2,
+      "id": "6RTyki1"
+    },
+    {
+      "login": "adfaqfwqfqwf",
+      "password": "qwerty",
+      "regirested_at": "2026-01-30 09:58",
+      "role_id": 2,
+      "id": "2tk3kRV"
+    }
+  ],
+  "roles": [
+    {
+      "id": 0,
+      "name": "Администратор"
+    },
+    {
+      "id": 1,
+      "name": "Модератор"
+    },
+    {
+      "id": 2,
+      "name": "Покупатель"
+    },
+    {
+      "id": 3,
+      "name": "Гость"
+    }
+  ],
+  "categories": [
+    {
+      "id": 0,
+      "name": "Смартфоны"
+    },
+    {
+      "id": 1,
+      "name": "Кофемашины"
+    },
+    {
+      "id": 2,
+      "name": "Телевизоры"
+    },
+    {
+      "id": 3,
+      "name": "Повербанки"
+    }
+  ],
+  "sessions": []
 }

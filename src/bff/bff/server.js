@@ -1,9 +1,12 @@
 import { getUser } from './get-user.js';
 import { addUser } from './add-user.js';
 import { sessions } from '../sessions.js';
-// import { createSession } from './create-session.js';
 
 export const server = {
+	async logout(session) {
+		sessions.remove(session);
+	},
+
 	async authorize(authLogin, authPassword) {
 		const user = await getUser(authLogin);
 

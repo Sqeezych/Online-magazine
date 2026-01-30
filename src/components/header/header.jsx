@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { selectUser } from '../../selectors';
 import { Icon } from '../icon/icon.jsx';
 import { AboutUser, EnterButton } from './components';
+import { ROLES } from '../../constants';
 import styled from 'styled-components';
 
 const ToMainPageDiv = styled.div`
@@ -21,7 +22,11 @@ const HeaderContainer = ({ className }) => {
 		<div className={className}>
 			<div className="header-buttons">
 				<Icon id="fa-shopping-cart" size="40px" inactive={false} />
-				{user.session ? <AboutUser user={user} /> : <EnterButton />}
+				{user.roleId !== ROLES.GUEST ? (
+					<AboutUser user={user} />
+				) : (
+					<EnterButton />
+				)}
 			</div>
 			{location.pathname !== '/' ? (
 				<Link to="/">

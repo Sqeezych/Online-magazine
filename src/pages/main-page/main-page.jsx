@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { Button, SearchInput } from '../../components';
 import { Categories, ProductCard } from './components';
 import styled from 'styled-components';
 
 const MainPageContainer = ({ className }) => {
 	const [products, setProducts] = useState([]);
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		fetch('http://localhost:3000/products')

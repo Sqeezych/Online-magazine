@@ -1,5 +1,7 @@
 import { ACTION_TYPES } from './action-types.js';
+import { server } from '../bff/bff';
 
-export const LOGOUT = {
-	type: ACTION_TYPES.LOGOUT,
+export const logout = (session) => {
+	server.logout(session);
+	return { type: ACTION_TYPES.LOGOUT };
 };

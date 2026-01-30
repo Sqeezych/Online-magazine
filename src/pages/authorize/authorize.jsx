@@ -60,6 +60,7 @@ const AuthorizeContainer = ({ className }) => {
 
 	const {
 		register,
+		reset,
 		handleSubmit,
 		formState: { errors },
 	} = useForm({
@@ -80,6 +81,7 @@ const AuthorizeContainer = ({ className }) => {
 			} else {
 				setServerError(null);
 				dispatch(setUser(res));
+				reset();
 				navigate('/');
 			}
 		});
