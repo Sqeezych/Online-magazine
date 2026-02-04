@@ -59,11 +59,11 @@ const SuccessRegistrationWindow = styled.div`
 	border-radius: 10px;
 
 	position: absolute;
-	top: 50%;
+	top: -150px;
 	left: 50%;
-	transform: translate(-50%, -50%);
+	transform: translate(-50%);
 	width: 100%;
-	height: 100%;
+	height: 35%;
 	padding: 20px 20px;
 
 	font-size: 24px;

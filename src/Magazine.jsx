@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import { Header, Footer } from './components';
-import { MainPage, Authorize, Register, Product } from './pages';
+import { MainPage, Authorize, Register, Product, AddProduct } from './pages';
 import styled from 'styled-components';
 
 const AppColumn = styled.div`
@@ -21,6 +21,7 @@ export const Magazine = () => {
 				<Route path="/authorize" element={<Authorize />} />
 				<Route path="/register" element={<Register />} />
 				<Route path="/product/:id" element={<Product />} />
+				<Route path="/add-product" element={<AddProduct />} />
 				<Route path="*" element={<div>Ошибка</div>} />
 			</Routes>
 			<Footer />
