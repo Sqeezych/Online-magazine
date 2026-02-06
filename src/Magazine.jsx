@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 const AppColumn = styled.div`
 	position: relative;
-	padding: 150px 50px 100px 50px;
+	padding: 150px 50px 150px 50px;
 	margin: 0 auto;
 	min-height: 100%;
 	width: 1000px;
