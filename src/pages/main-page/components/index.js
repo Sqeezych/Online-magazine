@@ -1,2 +1,2 @@
 export * from './categories/categories.jsx';
-export * from './product-card/product-card.jsx';
+export * from '../../../components/product-card/product-card.jsx';

@@ -6,4 +6,5 @@ export const addProductFormSchema = yup.object().shape({
 	price: yup.string().required('Заполните поле цены'),
 	count: yup.string().required('Заполните поле кол-ва товара'),
 	image: yup.string().required('Заполните поле изображения'),
+	description: yup.string().required('Заполните описание'),
 });

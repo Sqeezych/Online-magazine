@@ -4,36 +4,27 @@
       "id": "001",
       "image_url": "https://pngicon.ru/file/uploads/sova-s-pismom.png",
       "name": "Повербанк Про Макс Ультра",
-      "description": "Невероятно вместительный",
+      "description": "s simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
       "price": 2000,
-      "count": 50,
+      "count": 8,
       "category_id": 3
     },
     {
       "id": "002",
       "image_url": "https://pngicon.ru/file/uploads/ikonka-korova-128x128.png",
       "name": "Телевизор супер вижион про",
-      "description": "Отличная матрица",
-      "price": 20000,
-      "count": 10,
+      "description": "s simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      "price": 200000,
+      "count": 7,
       "category_id": 2
     },
     {
       "id": "003",
       "image_url": "https://pngicon.ru/file/uploads/ikonka-korova-128x128.png",
       "name": "Кофемашина турбо айс латте",
-      "description": "Наивкуснейший коффе",
+      "description": "s simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
       "price": 40000,
-      "count": 18,
-      "category_id": 1
-    },
-    {
-      "id": "004",
-      "image_url": "https://pngicon.ru/file/uploads/ikonka-korova-128x128.png",
-      "name": "Кофемашина турбо айс латте",
-      "description": "Наивкуснейший коффе",
-      "price": 40000,
-      "count": 18,
+      "count": 3,
       "category_id": 1
     }
   ],

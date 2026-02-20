@@ -1,4 +1,4 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../../selectors';
 import { Icon } from '../icon/icon.jsx';
@@ -17,11 +17,21 @@ const ToMainPageDiv = styled.div`
 const HeaderContainer = ({ className }) => {
 	const location = useLocation();
 	const user = useSelector(selectUser);
+	const navigate = useNavigate();
+
+	const onClick = () => {
+		navigate('/cart');
+	};
 
 	return (
 		<div className={className}>
 			<div className="header-buttons">
-				<Icon id="fa-shopping-cart" size="40px" inactive={false} />
+				<Icon
+					id="fa-shopping-cart"
+					size="40px"
+					inactive={false}
+					onClick={onClick}
+				/>
 				{user.roleId !== ROLES.GUEST ? (
 					<AboutUser user={user} />
 				) : (

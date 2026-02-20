@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-// import { useDispatch } from 'react-redux';
 import { Button, SearchInput } from '../../components';
 import { Categories, ProductCard } from './components';
 import styled from 'styled-components';
@@ -19,7 +18,7 @@ const MainPageContainer = ({ className }) => {
 	return (
 		<div className={className}>
 			<SearchInput />
-
+			{/* { id, name, price, image_url } */}
 			<div className="content">
 				<Categories className="content-categories" />
 				<div className="content-items">
@@ -32,14 +31,8 @@ const MainPageContainer = ({ className }) => {
 						Отфильтровать по стоимости
 					</Button>
 					<div className="content-items-products">
-						{products.map(({ id, name, price, image_url }) => (
-							<ProductCard
-								key={id}
-								id={id}
-								name={name}
-								price={price}
-								imageUrl={image_url}
-							/>
+						{products.map((product) => (
+							<ProductCard key={product.id} product={product} />
 						))}
 					</div>
 				</div>

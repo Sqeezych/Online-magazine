@@ -1,92 +1,45 @@
-import { Link } from 'react-router-dom';
-import { SearchInput, Button } from '../../components';
+import { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { SearchInput } from '../../components';
+import { PhotoAndDescription, PriceAndBuyButton } from './components';
+import { selectUserRole } from '../../selectors';
+import { ROLES } from '../../constants';
 import styled from 'styled-components';
-
-const PriceAndBuyButton = styled.div`
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	margin: 20px 0 0 390px;
-
-	width: 400px;
-`;
-
-const Image = styled.img`
-	width: 350px;
-	height: 350px;
-`;
 
 const ProductCount = styled.div`
 	font-size: 14px;
 	margin: 10px 0 0 390px;
 `;
 
-const PhotoAndDescription = styled.div`
-	display: flex;
-	margin-top: 40px;
-`;
-
-const Description = styled.div`
-	display: flex;
-	flex-direction: column;
-	margin-left: 40px;
-
-	& .description-title {
-		text-align: center;
-		font-size: 20px;
-	}
-
-	& .description-text {
-		margin-top: 20px;
-	}
-`;
-
 const ProductContainer = ({ className }) => {
+	const { id } = useParams();
+	const [product, setProduct] = useState({});
+
+	useEffect(() => {
+		fetch(`http://localhost:3000/products/${id}`)
+			.then((response) => response.json())
+			.then((productFromServer) => setProduct(productFromServer));
+	}, []);
+
+	const userRole = useSelector(selectUserRole);
+
 	return (
 		<>
 			<SearchInput />
 			<div className={className}>
-				<Link className="change-product-button">Изменить</Link>
+				{userRole === ROLES.ADMIN ? (
+					<Link className="change-product-button">Изменить</Link>
+				) : null}
 				<div className="flex-container">
-					<div className="title">
-						Товар с супер огромным названием, потому что наименование товара
-						действительно может быть очень огромным и оно должно отображаться
-						полностью
-					</div>
+					<div className="title">{product.name}</div>
+					<PriceAndBuyButton product={product} id={id} />
 
-					<PriceAndBuyButton>
-						<div className="price">{'Стоимость'} руб.</div>
-						<Button
-							className="content-filter-button"
-							width="140px"
-							height="30px"
-							fontSize="21px"
-						>
-							Купить
-						</Button>
-					</PriceAndBuyButton>
-
-					<ProductCount>Доступно на складе - {20} шт.</ProductCount>
-
-					<PhotoAndDescription>
-						<Image src="https://pngicon.ru/file/uploads/sova-s-pismom.png" />
-						<Description>
-							<div className="description-title">Описание товара</div>
-							<div className="description-text">
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-								Suspendisse at lobortis velit. Cras eget est in magna
-								egestas molestie et lobortis felis. Nullam at urna purus.
-								Nam blandit eu massa a dignissim. Pellentesque eu
-								imperdiet arcu. In posuere pellentesque neque, ut
-								tristique ipsum bibendum eu. Nulla eu velit quis ante
-								sollicitudin convallis. Sed ornare leo et orci vehicula,
-								ut luctus nibh egestas. Sed volutpat volutpat eros nec
-								accumsan. Etiam eu ullamcorper quam. Curabitur cursus sit
-								amet enim eu porttitor. Suspendisse porta ut arcu ac
-								posuere.
-							</div>
-						</Description>
-					</PhotoAndDescription>
+					<ProductCount>Доступно на складе - {product.count} шт.</ProductCount>
+					<PhotoAndDescription
+						img={product.image_url}
+						description={product.description}
+					/>
 				</div>
 			</div>
 		</>
@@ -96,7 +49,8 @@ const ProductContainer = ({ className }) => {
 export const Product = styled(ProductContainer)`
 	position: relative;
 	width: 900px;
-	min-height: 600px;
+	// height: 600px;
+	height: fit-content;
 	background-color: #fff;
 	border: 1px solid #000;
 	border-radius: 20px;
@@ -116,8 +70,7 @@ export const Product = styled(ProductContainer)`
 		flex-direction: column;
 	}
 
-	& .title,
-	.price {
+	& .title {
 		font-size: 22px;
 	}
 `;
