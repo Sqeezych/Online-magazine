@@ -1,6 +1,14 @@
 import { Routes, Route } from 'react-router-dom';
 import { Header, Footer } from './components';
-import { MainPage, Authorize, Register, Product, AddProduct, Cart } from './pages';
+import {
+	AddProduct,
+	AccessError,
+	Authorize,
+	Cart,
+	Register,
+	MainPage,
+	Product,
+} from './pages';
 import styled from 'styled-components';
 
 const AppColumn = styled.div`
@@ -9,7 +17,6 @@ const AppColumn = styled.div`
 	margin: 0 auto;
 	min-height: 100%;
 	width: 1000px;
-	background-color: #faf6f0;
 `;
 
 export const Magazine = () => {
@@ -23,6 +30,7 @@ export const Magazine = () => {
 				<Route path="/product/:id" element={<Product />} />
 				<Route path="/add-product" element={<AddProduct />} />
 				<Route path="/cart" element={<Cart />} />
+				<Route path="/access-error" element={<AccessError />} />
 				<Route path="*" element={<div>Ошибка</div>} />
 			</Routes>
 			<Footer />

@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { setUser } from '../../actions';
 import { authFormSchema } from './schema';
-import { server } from '../../bff/bff';
+import { server } from '../../bff';
 import styled from 'styled-components';
 
 const Form = styled.form`

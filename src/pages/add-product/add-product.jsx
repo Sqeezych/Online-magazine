@@ -1,7 +1,11 @@
 import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+// import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { addProductFormSchema } from './schema';
+// import { ROLES } from '../../constants';
+import { server } from '../../bff';
 import styled from 'styled-components';
 
 const H2 = styled.h2`
@@ -116,12 +120,12 @@ const AddProductContainer = ({ className }) => {
 	});
 
 	const [categories, setCategories] = useState([]);
+	const user = useSelector((state) => state.user);
+	// const navigate = useNavigate();
 	// const [serverError, setServerError] = useState(null);
 
 	useEffect(() => {
-		fetch('http://localhost:3000/categories')
-			.then((response) => response.json())
-			.then((categories) => setCategories(categories));
+		server.fetchCategories(user.session);
 	}, []);
 
 	const addProduct = async (name, category, price, count, image, description) => {

@@ -1,5 +1,5 @@
 import { ACTION_TYPES } from '../action-types.js';
-import { server } from '../../bff/bff/index.js';
+import { server } from '../../bff';
 
 export const logout = (session) => {
 	server.logout(session);

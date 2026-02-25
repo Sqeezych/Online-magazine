@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { Button, SearchInput } from '../../components';
+import { SearchInput } from '../../components';
 import { ProductCard } from '../../components';
 import styled from 'styled-components';
 
@@ -49,19 +49,16 @@ const TotalCountAndPrice = styled.div`
 	align-items: center;
 
 	margin-top: 40px;
-`;
 
-const TotalCount = styled.div`
-	font-size: 18px;
-`;
-
-const TotalPrice = styled.div`
-	font-size: 18px;
+	> div {
+		font-size: 18px;
+	}
 `;
 
 const CartContainer = ({ className }) => {
 	const products = useSelector((state) => state.cart.products);
 	const totalPrice = useSelector((state) => state.cart.totalPrice);
+	const totalCount = useSelector((state) => state.cart.totalCount);
 
 	// const dispatch = useDispatch();
 
@@ -78,8 +75,8 @@ const CartContainer = ({ className }) => {
 				<Total>
 					<TotalTitle>Итого:</TotalTitle>
 					<TotalCountAndPrice>
-						<TotalCount>{22} шт.</TotalCount>
-						<TotalPrice>{totalPrice} руб.</TotalPrice>
+						<div>{totalCount} шт.</div>
+						<div>{totalPrice} руб.</div>
 					</TotalCountAndPrice>
 				</Total>
 			</Content>

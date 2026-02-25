@@ -10,38 +10,86 @@ const ToMainPageDiv = styled.div`
 	position: absolute;
 	left: 50px;
 	top: 120px;
-	font-size: 14px;
-	text-decoration: underline;
+
+	> a {
+		font-size: 14px;
+	}
+`;
+
+const HeaderButtons = styled.div`
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	& > .fa fa-plus {
+		position: absolute;
+	}
+`;
+
+const IconWithTotalPrice = styled.div`
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+`;
+
+const InformationFromCart = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+
+	margin-left: 20px;
+	> div {
+		font-size: 17px;
+	}
 `;
 
 const HeaderContainer = ({ className }) => {
 	const location = useLocation();
 	const user = useSelector(selectUser);
+	const totalPrice = useSelector((state) => state.cart.totalPrice);
+	const totalCount = useSelector((state) => state.cart.totalCount);
 	const navigate = useNavigate();
 
-	const onClick = () => {
+	const navigateToCart = () => {
 		navigate('/cart');
+	};
+	const navigateToAddProduct = () => {
+		navigate('/add-product');
 	};
 
 	return (
 		<div className={className}>
-			<div className="header-buttons">
-				<Icon
-					id="fa-shopping-cart"
-					size="40px"
-					inactive={false}
-					onClick={onClick}
-				/>
+			<HeaderButtons>
+				<IconWithTotalPrice>
+					<Icon
+						id="fa-shopping-cart"
+						size="40px"
+						inactive={false}
+						onClick={navigateToCart}
+					/>
+					<InformationFromCart>
+						<div>{totalCount} товаров</div>
+						<div>{totalPrice} руб.</div>
+					</InformationFromCart>
+				</IconWithTotalPrice>
 				{user.roleId !== ROLES.GUEST ? (
 					<AboutUser user={user} />
 				) : (
 					<EnterButton />
 				)}
-			</div>
+				{user.roleId === ROLES.ADMIN ? (
+					<Icon
+						id="fa-plus"
+						size="20px"
+						inactive={false}
+						onClick={navigateToAddProduct}
+					/>
+				) : null}
+			</HeaderButtons>
 			{location.pathname !== '/' ? (
-				<Link to="/">
-					<ToMainPageDiv>На главную</ToMainPageDiv>
-				</Link>
+				<ToMainPageDiv>
+					<Link to="/">Главная</Link>
+				</ToMainPageDiv>
 			) : null}
 		</div>
 	);
@@ -56,10 +104,4 @@ export const Header = styled(HeaderContainer)`
 	height: 100px;
 	width: 100%;
 	background-color: #fdf3e2;
-
-	& .header-buttons {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-	}
 `;

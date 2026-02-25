@@ -1,4 +1,4 @@
-import { getFormatedDate } from './utils';
+import { getFormatedDate } from '../utils';
 
 export const addUser = (login, password) =>
 	fetch('http://localhost:3000/users', {
@@ -9,7 +9,7 @@ export const addUser = (login, password) =>
 		body: JSON.stringify({
 			login,
 			password,
-			regirested_at: getFormatedDate(),
+			registered_at: getFormatedDate(),
 			role_id: 2,
 		}),
 	});

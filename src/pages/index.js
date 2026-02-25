@@ -4,3 +4,4 @@ export * from './authorize/authorize.jsx';
 export * from './register/register.jsx';
 export * from './add-product/add-product.jsx';
 export * from './cart/cart.jsx';
+export * from './access-error/access-error.jsx';

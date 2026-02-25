@@ -3,6 +3,12 @@ import { Button, SearchInput } from '../../components';
 import { Categories, ProductCard } from './components';
 import styled from 'styled-components';
 
+const Products = styled.div`
+	> *:not(:last-child) {
+		margin-bottom: 32px;
+	}
+`;
+
 const MainPageContainer = ({ className }) => {
 	const [products, setProducts] = useState([]);
 	// const dispatch = useDispatch();
@@ -18,7 +24,6 @@ const MainPageContainer = ({ className }) => {
 	return (
 		<div className={className}>
 			<SearchInput />
-			{/* { id, name, price, image_url } */}
 			<div className="content">
 				<Categories className="content-categories" />
 				<div className="content-items">
@@ -30,11 +35,11 @@ const MainPageContainer = ({ className }) => {
 					>
 						Отфильтровать по стоимости
 					</Button>
-					<div className="content-items-products">
+					<Products>
 						{products.map((product) => (
 							<ProductCard key={product.id} product={product} />
 						))}
-					</div>
+					</Products>
 				</div>
 			</div>
 		</div>
@@ -55,13 +60,5 @@ export const MainPage = styled(MainPageContainer)`
 
 	& .content-filter-button {
 		margin-bottom: 50px;
-	}
-
-	& .content-items-products > * {
-		margin-bottom: 32px;
-	}
-
-	& .content-items-products > :last-child {
-		margin-bottom: 0;
 	}
 `;

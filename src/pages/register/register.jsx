@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { server } from '../../bff/bff';
+import { server } from '../../bff';
 import { registerFormSchema } from './schema';
 import styled from 'styled-components';
 

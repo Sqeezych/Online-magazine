@@ -3,6 +3,7 @@ import { ACTION_TYPES } from '../actions';
 const initialCartState = {
 	products: [],
 	totalPrice: 0,
+	totalCount: 0,
 };
 
 export const cartReducer = (state = initialCartState, { type, payload }) => {
@@ -20,15 +21,24 @@ export const cartReducer = (state = initialCartState, { type, payload }) => {
 				},
 			];
 
-			const total = updatedProducts.reduce(
-				(acc, elem) => acc + elem.price * elem.countInCart,
-				0,
-			);
+			let price = 0;
+			let count = 0;
+
+			updatedProducts.forEach((elem) => {
+				price += elem.price * elem.countInCart;
+				count += elem.countInCart;
+			});
+
+			// const total = updatedProducts.reduce(
+			// 	(acc, elem) => acc + elem.price * elem.countInCart,
+			// 	0,
+			// );
 
 			return {
 				...state,
 				products: updatedProducts,
-				totalPrice: total,
+				totalPrice: price,
+				totalCount: count,
 			};
 		}
 
@@ -42,15 +52,24 @@ export const cartReducer = (state = initialCartState, { type, payload }) => {
 
 			const updatedProducts = copyOfProducts;
 
-			const total = updatedProducts.reduce(
-				(acc, elem) => acc + elem.price * elem.countInCart,
-				0,
-			);
+			let price = 0;
+			let count = 0;
+
+			updatedProducts.forEach((elem) => {
+				price += elem.price * elem.countInCart;
+				count += elem.countInCart;
+			});
+
+			// const total = updatedProducts.reduce(
+			// 	(acc, elem) => acc + elem.price * elem.countInCart,
+			// 	0,
+			// );
 
 			return {
 				...state,
 				products: updatedProducts,
-				totalPrice: total,
+				totalPrice: price,
+				totalCount: count,
 			};
 		}
 
@@ -67,15 +86,23 @@ export const cartReducer = (state = initialCartState, { type, payload }) => {
 				updatedProducts.splice(elementForChange, 1);
 			}
 
-			const total = updatedProducts.reduce(
-				(acc, elem) => acc + elem.price * elem.countInCart,
-				0,
-			);
+			let price = 0;
+			let count = 0;
+
+			updatedProducts.forEach((elem) => {
+				price += elem.price * elem.countInCart;
+				count += elem.countInCart;
+			});
+			// const total = updatedProducts.reduce(
+			// 	(acc, elem) => acc + elem.price * elem.countInCart,
+			// 	0,
+			// );
 
 			return {
 				...state,
 				products: updatedProducts,
-				totalPrice: total,
+				totalPrice: price,
+				totalCount: count,
 			};
 		}
 
@@ -93,15 +120,24 @@ export const cartReducer = (state = initialCartState, { type, payload }) => {
 				updatedProducts[elementForChange].countInCart++;
 			}
 
-			const total = updatedProducts.reduce(
-				(acc, elem) => acc + elem.price * elem.countInCart,
-				0,
-			);
+			let price = 0;
+			let count = 0;
+
+			updatedProducts.forEach((elem) => {
+				price += elem.price * elem.countInCart;
+				count += elem.countInCart;
+			});
+
+			// const total = updatedProducts.reduce(
+			// 	(acc, elem) => acc + elem.price * elem.countInCart,
+			// 	0,
+			// );
 
 			return {
 				...state,
 				products: updatedProducts,
-				totalPrice: total,
+				totalPrice: price,
+				totalCount: count,
 			};
 		}
 
