@@ -1,15 +1,20 @@
 import { useState, useEffect } from 'react';
 import { Button } from '../../../../components';
 import { Category } from './category';
+import { useServerRequest } from '../../../../hooks';
+import { OPERATIONS } from '../../../../constants';
 import styled from 'styled-components';
 
 const CategoriesContainer = ({ className }) => {
 	const [categories, setCategories] = useState([]);
+	const requestServer = useServerRequest();
 
 	useEffect(() => {
-		fetch('http://localhost:3000/categories')
-			.then((response) => response.json())
-			.then((categories) => setCategories(categories));
+		requestServer(OPERATIONS.FETCH_CATEGORIES).then(({ error, res }) => {
+			if (!error) {
+				setCategories(res);
+			}
+		});
 	}, []);
 
 	return (

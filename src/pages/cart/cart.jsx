@@ -60,18 +60,20 @@ const CartContainer = ({ className }) => {
 	const totalPrice = useSelector((state) => state.cart.totalPrice);
 	const totalCount = useSelector((state) => state.cart.totalCount);
 
-	// const dispatch = useDispatch();
-
 	return (
 		<div className={className}>
 			<SearchInput />
 			<H2>Корзина</H2>
 			<Content>
-				<ContentProducts>
-					{products.map((product) => (
-						<ProductCard key={product.id} product={product} />
-					))}
-				</ContentProducts>
+				{products.length === 0 ? (
+					'В корзине нет товаров'
+				) : (
+					<ContentProducts>
+						{products.map((product) => (
+							<ProductCard key={product.id} product={product} />
+						))}
+					</ContentProducts>
+				)}
 				<Total>
 					<TotalTitle>Итого:</TotalTitle>
 					<TotalCountAndPrice>

@@ -1,3 +1,4 @@
+export * from './add-product.js';
 export * from './add-user.js';
 export * from './get-categories.js';
 export * from './get-products.js';

@@ -1,21 +1,16 @@
 import { getCategories } from '../api';
-import { sessions } from '../sessions.js';
-import { ROLES } from '../constants';
 
-export const fetchCategories = async (userSession) => {
-	const accessRoles = [ROLES.ADMIN];
-
-	if (!sessions.checkAccess(userSession, accessRoles)) {
+export const fetchCategories = async () => {
+	try {
+		const categories = await getCategories();
 		return {
-			error: 'Нет доступа к категориям',
+			error: null,
+			res: categories,
+		};
+	} catch (error) {
+		return {
+			error: error.message,
 			res: null,
 		};
 	}
-
-	const categories = await getCategories();
-
-	return {
-		error: null,
-		res: categories,
-	};
 };

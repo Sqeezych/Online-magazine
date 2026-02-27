@@ -1,5 +1,8 @@
-export const getCategories = () => {
-	fetch('http://localhost:3000/categories')
-		.then((response) => response.json())
-		.then((categories) => categories);
+export const getCategories = async () => {
+	const response = await fetch('http://localhost:3000/categories');
+	if (!response.ok) {
+		throw new Error('Ошибка при получении списка категорий');
+	}
+
+	return response.json();
 };

@@ -1,9 +1,9 @@
-import { transformProduct } from '../transformers';
+export const getProducts = async () => {
+	const response = await fetch('http://localhost:3000/products');
 
-export const getProducts = () => {
-	fetch('http://localhost:3000/products')
-		.then((response) => response.json())
-		.then((products) => {
-			return products.map(transformProduct);
-		});
+	if (!response.ok) {
+		throw new Error('Ошибка при получении списка товаров');
+	}
+
+	return response.json();
 };

@@ -94,7 +94,7 @@ const RegisterContainer = ({ className }) => {
 		setTimeout(() => {
 			setSuccessRegistration(false);
 			navigate('/authorize');
-		}, 3000);
+		}, 2000);
 	};
 
 	const onSubmit = ({ login, password }) => {

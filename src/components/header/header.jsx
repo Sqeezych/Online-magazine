@@ -1,6 +1,6 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { selectUser } from '../../selectors';
+import { selectUser, selectCartTotalCount, selectCartTotalPrice } from '../../selectors';
 import { Icon } from '../icon/icon.jsx';
 import { AboutUser, EnterButton } from './components';
 import { ROLES } from '../../constants';
@@ -45,10 +45,11 @@ const InformationFromCart = styled.div`
 
 const HeaderContainer = ({ className }) => {
 	const location = useLocation();
-	const user = useSelector(selectUser);
-	const totalPrice = useSelector((state) => state.cart.totalPrice);
-	const totalCount = useSelector((state) => state.cart.totalCount);
 	const navigate = useNavigate();
+
+	const user = useSelector(selectUser);
+	const totalPrice = useSelector(selectCartTotalPrice);
+	const totalCount = useSelector(selectCartTotalCount);
 
 	const navigateToCart = () => {
 		navigate('/cart');

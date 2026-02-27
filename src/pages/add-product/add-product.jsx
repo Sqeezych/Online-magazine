@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { useSelector } from 'react-redux';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { addProductFormSchema } from './schema';
-// import { ROLES } from '../../constants';
-import { server } from '../../bff';
+import { ROLES, OPERATIONS } from '../../constants';
+import { useServerRequest } from '../../hooks';
+import { selectUserRole } from '../../selectors';
 import styled from 'styled-components';
 
 const H2 = styled.h2`
@@ -93,11 +94,28 @@ const ErrorContainer = styled.div`
 	position: absolute;
 	top: 320px;
 	left: 0;
-	width: 100%;
-	min-height: 60px;
-	padding: 20px 20px;
+	width: 30%;
+	min-height: 30px;
+	padding: 10px;
 
 	font-size: 17px;
+	text-align: center;
+`;
+
+const SuccessCreateProductWindow = styled.div`
+	background-color: #9bdfac;
+	border: 1px solid #000;
+	border-radius: 10px;
+
+	position: absolute;
+	top: -50px;
+	left: 50%;
+	transform: translate(-50%);
+	width: 30%;
+	height: fit-content;
+	padding: 10px;
+
+	font-size: 18px;
 	text-align: center;
 `;
 
@@ -120,34 +138,46 @@ const AddProductContainer = ({ className }) => {
 	});
 
 	const [categories, setCategories] = useState([]);
-	const user = useSelector((state) => state.user);
-	// const navigate = useNavigate();
-	// const [serverError, setServerError] = useState(null);
+	const [serverError, setServerError] = useState(null);
+	const [successCreateProduct, setSuccessCreateProduct] = useState(false);
+
+	const requestServer = useServerRequest();
+	const navigate = useNavigate();
+	const userRole = useSelector(selectUserRole);
 
 	useEffect(() => {
-		server.fetchCategories(user.session);
+		if (userRole !== ROLES.ADMIN) {
+			navigate('/access-error');
+		} else {
+			requestServer(OPERATIONS.FETCH_CATEGORIES).then(({ error, res }) => {
+				if (error) {
+					setServerError(error);
+				} else {
+					setCategories(res);
+				}
+			});
+		}
 	}, []);
 
-	const addProduct = async (name, category, price, count, image, description) => {
-		await fetch('http://localhost:3000/products', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-				image_url: image,
-				name: name,
-				description: description,
-				price: Number(price),
-				count: Number(count),
-				category_id: Number(category),
-			}),
+	const showSuccessCreateProduct = () => {
+		setSuccessCreateProduct(true);
+		setTimeout(() => {
+			setSuccessCreateProduct(false);
+		}, 2000);
+	};
+	const onSubmitForm = (data) => {
+		requestServer(OPERATIONS.CREATE_PRODUCT, data).then(({ error }) => {
+			if (error) {
+				setServerError(error);
+			} else {
+				showSuccessCreateProduct();
+			}
 		});
+		reset();
 	};
 
-	const onSubmit = ({ name, category, price, count, image, description }) => {
-		addProduct(name, category, price, count, image, description);
-		reset();
+	const onChangeForm = () => {
+		setServerError(null);
 	};
 
 	const validationError =
@@ -157,10 +187,14 @@ const AddProductContainer = ({ className }) => {
 		errors?.image?.message ||
 		errors?.category?.message ||
 		errors?.description?.message;
-	// const errorMessage = validationError || serverError;
+	const errorMessage = validationError || serverError;
 
 	return (
-		<form className={className} onSubmit={handleSubmit(onSubmit)}>
+		<form
+			className={className}
+			onSubmit={handleSubmit(onSubmitForm)}
+			onChange={onChangeForm}
+		>
 			<H2>Добавить товар</H2>
 			<InputsDiv>
 				<Input
@@ -199,7 +233,12 @@ const AddProductContainer = ({ className }) => {
 				></TextArea>
 			</InputsDiv>
 			<SubmitButton type="submit">Добавить</SubmitButton>
-			{validationError ? <ErrorContainer>{validationError}</ErrorContainer> : null}
+			{errorMessage ? <ErrorContainer>{errorMessage}</ErrorContainer> : null}
+			{successCreateProduct ? (
+				<SuccessCreateProductWindow>
+					Товар успешно добавлен
+				</SuccessCreateProductWindow>
+			) : null}
 		</form>
 	);
 };
