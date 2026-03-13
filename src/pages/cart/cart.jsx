@@ -1,6 +1,5 @@
 import { useSelector } from 'react-redux';
-import { SearchInput } from '../../components';
-import { ProductCard } from '../../components';
+import { SearchInput, ProductCard } from '../../components';
 import styled from 'styled-components';
 
 const H2 = styled.h2`

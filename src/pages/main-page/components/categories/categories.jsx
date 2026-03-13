@@ -1,30 +1,36 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button } from '../../../../components';
 import { Category } from './category';
 import { useServerRequest } from '../../../../hooks';
 import { OPERATIONS } from '../../../../constants';
+import { selectCategories } from '../../../../selectors';
+import { getCategories, CHANGE_IS_FILTERED } from '../../../../actions';
 import styled from 'styled-components';
 
 const CategoriesContainer = ({ className }) => {
-	const [categories, setCategories] = useState([]);
+	const dispatch = useDispatch();
+	const categories = useSelector(selectCategories);
 	const requestServer = useServerRequest();
 
 	useEffect(() => {
 		requestServer(OPERATIONS.FETCH_CATEGORIES).then(({ error, res }) => {
 			if (!error) {
-				setCategories(res);
+				dispatch(getCategories(res));
 			}
 		});
 	}, []);
+
+	const onClick = () => {
+		dispatch(CHANGE_IS_FILTERED);
+	};
 
 	return (
 		<div className={className}>
 			<div className="categories-title">Категории</div>
 			<div className="categories-list">
-				{categories.map((elem) => (
-					<Category className="categories-item" key={elem.id}>
-						{elem.name}
-					</Category>
+				{categories.map(({ id, name }) => (
+					<Category className="categories-item" key={id} name={name} id={id} />
 				))}
 			</div>
 			<Button
@@ -32,6 +38,7 @@ const CategoriesContainer = ({ className }) => {
 				width="230px"
 				height="40px"
 				fontSize="16px"
+				onClick={onClick}
 			>
 				Искать по категориям
 			</Button>

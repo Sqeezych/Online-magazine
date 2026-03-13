@@ -3,6 +3,7 @@ import { ACTION_TYPES } from '../actions';
 const initialAppState = {
 	wasLogout: false,
 	wasRegistered: false,
+	isFiltered: false,
 };
 
 export const appReducer = (state = initialAppState, action) => {
@@ -11,6 +12,13 @@ export const appReducer = (state = initialAppState, action) => {
 			return {
 				...state,
 				wasLogout: !state.wasLogout,
+			};
+		}
+
+		case ACTION_TYPES.CHANGE_IS_FILTERED: {
+			return {
+				...state,
+				isFiltered: !state.isFiltered,
 			};
 		}
 

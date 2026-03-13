@@ -1,5 +1,5 @@
-export const getProducts = async () => {
-	const response = await fetch('http://localhost:3000/products');
+export const getProducts = async (URL) => {
+	const response = await fetch(URL);
 
 	if (!response.ok) {
 		throw new Error('Ошибка при получении списка товаров');

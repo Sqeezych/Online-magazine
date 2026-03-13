@@ -1,13 +1,25 @@
+import { useDispatch } from 'react-redux';
+import { addCheckedCategory, removeCheckedCategory } from '../../../../../actions';
 import styled from 'styled-components';
 
-const CategoryContainer = ({ className, children }) => (
-	<div className={className}>
-		<div className="category-checkbox">
-			<input type="checkbox" />
+const CategoryContainer = ({ className, id, name }) => {
+	const dispatch = useDispatch();
+	const onChange = (e) => {
+		if (e.target.checked) {
+			dispatch(addCheckedCategory(id));
+		} else {
+			dispatch(removeCheckedCategory(id));
+		}
+	};
+	return (
+		<div className={className}>
+			<label>
+				<input type="checkbox" value={id} onChange={onChange} />
+				{name}
+			</label>
 		</div>
-		<div className="category-name">{children}</div>
-	</div>
-);
+	);
+};
 
 export const Category = styled(CategoryContainer)`
 	display: flex;
@@ -20,7 +32,7 @@ export const Category = styled(CategoryContainer)`
 	border: 1px solid #000;
 	border-radius: 20px;
 
-	& .category-name {
-		margin-left: 5px;
+	& input {
+		margin-right: 5px;
 	}
 `;

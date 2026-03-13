@@ -1,4 +1,4 @@
-import { getCategories } from '../api';
+import { getCategories } from '../api/get-categories';
 
 export const fetchCategories = async () => {
 	try {

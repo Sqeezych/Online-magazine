@@ -3,3 +3,6 @@ export * from './select-cart-total-price.js';
 export * from './select-user.js';
 export * from './select-user-session.js';
 export * from './select-user-role.js';
+export * from './select-categories.js';
+export * from './select-checked-categories.js';
+export * from './select-app-is-filtered.js';
