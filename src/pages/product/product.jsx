@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setProductForLocation, getCategories } from '../../actions';
 import { SearchInput } from '../../components';
 import { PhotoAndDescription, PriceAndBuyButton } from './components';
 import { selectUserRole } from '../../selectors';
-import { ROLES } from '../../constants';
+import { ROLES, OPERATIONS } from '../../constants';
+import { useServerRequest } from '../../hooks';
 import styled from 'styled-components';
 
 const ProductCount = styled.div`
@@ -13,13 +15,24 @@ const ProductCount = styled.div`
 `;
 
 const ProductContainer = ({ className }) => {
+	const requestServer = useServerRequest();
+	const dispatch = useDispatch();
 	const { id } = useParams();
 	const [product, setProduct] = useState({});
 
 	useEffect(() => {
 		fetch(`http://localhost:3000/products/${id}`)
 			.then((response) => response.json())
-			.then((productFromServer) => setProduct(productFromServer));
+			.then((productFromServer) => {
+				setProduct(productFromServer);
+				console.log(productFromServer);
+				dispatch(setProductForLocation(productFromServer));
+			});
+		requestServer(OPERATIONS.FETCH_CATEGORIES).then(({ error, res }) => {
+			if (!error) {
+				dispatch(getCategories(res));
+			}
+		});
 	}, []);
 
 	const userRole = useSelector(selectUserRole);
@@ -49,7 +62,6 @@ const ProductContainer = ({ className }) => {
 export const Product = styled(ProductContainer)`
 	position: relative;
 	width: 900px;
-	// height: 600px;
 	height: fit-content;
 	background-color: #fff;
 	border: 1px solid #000;

@@ -16,9 +16,7 @@ const ProductCardContainer = ({ className, product }) => {
 
 	return (
 		<div className={className}>
-			{/* <div className="product-image"> */}
 			<img src={product.image_url} alt="Картинка" />
-			{/* </div> */}
 			<div className="product-description">
 				<Link to={`/product/${product.id}`}>
 					<div className="product-description-title">{product.name}</div>
@@ -62,6 +60,11 @@ export const ProductCard = styled(ProductCardContainer)`
 	border: 1px solid #000;
 	border-radius: 20px;
 
+	& img {
+		width: 128px;
+		height: 128px;
+	}
+
 	& .product-description {
 		margin-left: 30px;
 	}
@@ -81,8 +84,4 @@ export const ProductCard = styled(ProductCardContainer)`
 	& .product-description-price {
 		font-size: 24px;
 	}
-
-	// & .product-description-button {
-	// 	margin-left: 90px;
-	// }
 `;

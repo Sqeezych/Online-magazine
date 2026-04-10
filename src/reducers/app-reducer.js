@@ -4,6 +4,7 @@ const initialAppState = {
 	wasLogout: false,
 	wasRegistered: false,
 	isFiltered: false,
+	productForLocation: {},
 };
 
 export const appReducer = (state = initialAppState, action) => {
@@ -19,6 +20,13 @@ export const appReducer = (state = initialAppState, action) => {
 			return {
 				...state,
 				isFiltered: !state.isFiltered,
+			};
+		}
+
+		case ACTION_TYPES.SET_PRODUCT_FOR_LOCATION: {
+			return {
+				...state,
+				productForLocation: action.payload,
 			};
 		}
 

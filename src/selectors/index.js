@@ -6,3 +6,4 @@ export * from './select-user-role.js';
 export * from './select-categories.js';
 export * from './select-checked-categories.js';
 export * from './select-app-is-filtered.js';
+export * from './select-product-for-location.js';

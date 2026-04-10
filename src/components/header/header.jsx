@@ -1,20 +1,10 @@
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { selectUser, selectCartTotalCount, selectCartTotalPrice } from '../../selectors';
-import { Icon } from '../icon/icon.jsx';
-import { AboutUser, EnterButton } from './components';
+import { Icon } from '../icon';
+import { AboutUser, EnterButton, LocationButtons } from './components';
 import { ROLES } from '../../constants';
 import styled from 'styled-components';
-
-const ToMainPageDiv = styled.div`
-	position: absolute;
-	left: 50px;
-	top: 120px;
-
-	> a {
-		font-size: 14px;
-	}
-`;
 
 const HeaderButtons = styled.div`
 	display: flex;
@@ -40,6 +30,15 @@ const InformationFromCart = styled.div`
 	margin-left: 20px;
 	> div {
 		font-size: 17px;
+	}
+`;
+const AboutUserBlock = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	& .add-product {
+		margin-left: 10px;
 	}
 `;
 
@@ -73,24 +72,25 @@ const HeaderContainer = ({ className }) => {
 						<div>{totalPrice} руб.</div>
 					</InformationFromCart>
 				</IconWithTotalPrice>
-				{user.roleId !== ROLES.GUEST ? (
-					<AboutUser user={user} />
-				) : (
-					<EnterButton />
-				)}
-				{user.roleId === ROLES.ADMIN ? (
-					<Icon
-						id="fa-plus"
-						size="20px"
-						inactive={false}
-						onClick={navigateToAddProduct}
-					/>
-				) : null}
+				<AboutUserBlock>
+					{user.roleId !== ROLES.GUEST ? (
+						<AboutUser user={user} />
+					) : (
+						<EnterButton />
+					)}
+					{user.roleId === ROLES.ADMIN ? (
+						<Icon
+							className="add-product"
+							id="fa-plus"
+							size="20px"
+							inactive={false}
+							onClick={navigateToAddProduct}
+						/>
+					) : null}
+				</AboutUserBlock>
 			</HeaderButtons>
 			{location.pathname !== '/' ? (
-				<ToMainPageDiv>
-					<Link to="/">Главная</Link>
-				</ToMainPageDiv>
+				<LocationButtons location={location.pathname} />
 			) : null}
 		</div>
 	);

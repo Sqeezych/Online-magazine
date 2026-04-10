@@ -32,7 +32,7 @@ export const AboutUser = styled(AboutUserContainer)`
 	justify-content: right;
 
 	height: 50px;
-	width: 400px;
+	max-width: 400px;
 
 	& .login {
 		font-size: 19px;

@@ -8,11 +8,6 @@ const initialCategoriesState = {
 export const categoriesReducer = (state = initialCategoriesState, action) => {
 	switch (action.type) {
 		case ACTION_TYPES.GET_CATEGORIES: {
-			const updatedCategories = action.payload.map((category) => ({
-				...category,
-				checked: false,
-			}));
-
 			return {
 				...state,
 				categories: action.payload,
@@ -26,12 +21,19 @@ export const categoriesReducer = (state = initialCategoriesState, action) => {
 		}
 		case ACTION_TYPES.REMOVE_CHECKED_CATEGORY: {
 			const updatedCheckedCategories = [...state.checkedCategories].filter(
-				(e) => e !== action.payload,
+				(checkedCategory) => checkedCategory !== action.payload,
 			);
 
 			return {
 				...state,
 				checkedCategories: updatedCheckedCategories,
+			};
+		}
+
+		case ACTION_TYPES.RESET_CHECKED_CATEGORIES: {
+			return {
+				...state,
+				checkedCategories: [],
 			};
 		}
 		default:
