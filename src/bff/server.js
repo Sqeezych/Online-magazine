@@ -4,6 +4,7 @@ import {
 	register,
 	fetchCategories,
 	fetchProducts,
+	fetchProduct,
 	createProduct,
 } from './operations';
 
@@ -13,5 +14,6 @@ export const server = {
 	register,
 	fetchCategories,
 	fetchProducts,
+	fetchProduct,
 	createProduct,
 };

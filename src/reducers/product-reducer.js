@@ -2,11 +2,12 @@ import { ACTION_TYPES } from '../actions';
 
 const initialProductState = {
 	id: null,
-	imageUrl: 'Изображение товара',
-	name: 'Наименование товара',
-	description: 'Описание товара',
-	price: 'Стоимость товара',
-	count: 'Кол-во товара',
+	imageUrl: null,
+	name: '',
+	description: '',
+	price: null,
+	count: null,
+	categoryId: null,
 };
 
 export const productReducer = (state = initialProductState, { type, payload }) => {
@@ -20,6 +21,7 @@ export const productReducer = (state = initialProductState, { type, payload }) =
 				description: payload.description,
 				price: payload.price,
 				count: payload.count,
+				categoryId: payload.category_id,
 			};
 		default:
 			return state;

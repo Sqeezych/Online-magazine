@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { setProductForLocation, getCategories } from '../../actions';
+import { setProduct, getCategories } from '../../actions';
 import { SearchInput } from '../../components';
 import { PhotoAndDescription, PriceAndBuyButton } from './components';
 import { selectUserRole } from '../../selectors';
@@ -17,25 +17,25 @@ const ProductCount = styled.div`
 const ProductContainer = ({ className }) => {
 	const requestServer = useServerRequest();
 	const dispatch = useDispatch();
+	const userRole = useSelector(selectUserRole);
 	const { id } = useParams();
 	const [product, setProduct] = useState({});
 
 	useEffect(() => {
-		fetch(`http://localhost:3000/products/${id}`)
-			.then((response) => response.json())
-			.then((productFromServer) => {
-				setProduct(productFromServer);
-				console.log(productFromServer);
-				dispatch(setProductForLocation(productFromServer));
-			});
+		requestServer(OPERATIONS.FETCH_PRODUCT, id).then(({ error, res }) => {
+			if (!error) {
+				setProduct(res);
+				dispatch(setProduct(res));
+			} else {
+				console.log(error);
+			}
+		});
 		requestServer(OPERATIONS.FETCH_CATEGORIES).then(({ error, res }) => {
 			if (!error) {
 				dispatch(getCategories(res));
 			}
 		});
 	}, []);
-
-	const userRole = useSelector(selectUserRole);
 
 	return (
 		<>

@@ -10,7 +10,7 @@ const LocationButtonsContainer = ({ className, location }) => {
 	const categories = useSelector(selectCategories);
 
 	const category = categories.filter((category) => category.id === product.category_id);
-	console.log(category);
+	// console.log(category);
 
 	function checkLocation(pathname, categoryName) {
 		if (pathname === '/authorize') {
@@ -27,7 +27,7 @@ const LocationButtonsContainer = ({ className, location }) => {
 	return (
 		<div className={className}>
 			<Link to="/">Главная</Link>
-			{checkLocation(location, category[0].name)}
+			{/* {checkLocation(location, category[0].name)} */}
 		</div>
 	);
 };
