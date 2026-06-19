@@ -19,12 +19,12 @@ const ProductContainer = ({ className }) => {
 	const dispatch = useDispatch();
 	const userRole = useSelector(selectUserRole);
 	const { id } = useParams();
-	const [product, setProduct] = useState({});
+	const [productForWiev, setProductForWiev] = useState({});
 
 	useEffect(() => {
 		requestServer(OPERATIONS.FETCH_PRODUCT, id).then(({ error, res }) => {
 			if (!error) {
-				setProduct(res);
+				setProductForWiev(res);
 				dispatch(setProduct(res));
 			} else {
 				console.log(error);
@@ -45,13 +45,15 @@ const ProductContainer = ({ className }) => {
 					<Link className="change-product-button">Изменить</Link>
 				) : null}
 				<div className="flex-container">
-					<div className="title">{product.name}</div>
-					<PriceAndBuyButton product={product} id={id} />
+					<div className="title">{productForWiev.name}</div>
+					<PriceAndBuyButton product={productForWiev} id={id} />
 
-					<ProductCount>Доступно на складе - {product.count} шт.</ProductCount>
+					<ProductCount>
+						Доступно на складе - {productForWiev.count} шт.
+					</ProductCount>
 					<PhotoAndDescription
-						img={product.image_url}
-						description={product.description}
+						img={productForWiev.image_url}
+						description={productForWiev.description}
 					/>
 				</div>
 			</div>

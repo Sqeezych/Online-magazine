@@ -1,3 +1,3 @@
-export * from './operations.js';
-export * from './roles.js';
-export * from './operations-without-session.js';
+export * from './operations.ts';
+export * from './roles.ts';
+export * from './operations-without-session.ts';

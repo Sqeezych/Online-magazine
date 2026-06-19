@@ -37,10 +37,10 @@ const IncrementAndDecrementButtonsContainer = ({
 		dispatch(deleteProductFromCart(product.id));
 	};
 	const decrementProductCount = () => {
-		dispatch(decrementCountOfProduct(product));
+		dispatch(decrementCountOfProduct(product.id));
 	};
 	const incrementProductCount = () => {
-		dispatch(incrementCountOfProduct(product));
+		dispatch(incrementCountOfProduct(product.id));
 	};
 
 	return (

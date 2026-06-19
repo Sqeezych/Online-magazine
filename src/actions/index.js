@@ -1,4 +1,4 @@
-export * from './action-types.js';
+export * from './action-types.ts';
 export * from './app-actions';
 export * from './user-actions';
 export * from './product-actions';

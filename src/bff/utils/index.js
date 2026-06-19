@@ -1,1 +1,1 @@
-export * from './get-fomated-date.js';
+export * from './get-fomated-date.ts';
