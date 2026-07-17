@@ -56,7 +56,11 @@ const ErrorContainer = styled.div`
 	text-align: center;
 `;
 
-const AuthorizeContainer = ({ className }) => {
+interface AccessErrorProps {
+	className: string
+}
+
+const AuthorizeContainer = ({ className }: AccessErrorProps) => {
 	const [serverError, setServerError] = useState<string | null>(null);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const dispatch = useDispatch();

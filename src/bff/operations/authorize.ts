@@ -1,7 +1,25 @@
 import { getUser } from '../api/index.js';
 import { sessions } from '../sessions.js';
+import { ROLES } from '../constants';
 
-export const authorize = async (authLogin: string, authPassword: string) => {
+interface AuthorizeProps {
+	authLogin: string;
+	authPassword: string;
+}
+
+interface Response {
+	id: string,
+	login: string,
+	roleId: typeof ROLES[keyof typeof ROLES],
+	session: string,
+}
+
+interface AuthorizeReturn {
+	error: string | null;
+	res: null | Response;
+}
+
+export const authorize = async ({authLogin, authPassword}: AuthorizeProps): AuthorizeReturn => {
 	try {
 		const user = await getUser(authLogin);
 

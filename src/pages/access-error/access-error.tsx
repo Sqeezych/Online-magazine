@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
-const AccessErrorContainer = ({ className }) => {
+interface AccessErrorProps {
+	className: string
+}
+
+const AccessErrorContainer = ({ className }: AccessErrorProps) => {
 	return <div className={className}>Доступ запрещен</div>;
 };
 

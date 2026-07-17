@@ -1,6 +1,16 @@
+import { ROLES } from '../constants';
+
+interface User {
+	id: string,
+	login: string,
+	password: string,
+	registeredAt: string,
+	roleId: typeof ROLES[keyof typeof ROLES],
+}
+
 export const sessions = {
 	list: {},
-	create(user) {
+	create(user: User) {
 		const hash = Math.random().toFixed(50);
 		this.list[hash] = user;
 		return hash;

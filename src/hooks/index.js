@@ -1,1 +1,1 @@
-export * from './use-server-request.js';
+export * from './use-server-request';
