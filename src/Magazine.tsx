@@ -1,4 +1,8 @@
 import { Routes, Route } from 'react-router-dom';
+import { sessions } from './bff/sessions';
+import { useEffect } from 'react';
+import { useAppDispatch } from './hooks';
+import { setUser } from './actions';
 import { Header, Footer } from './components';
 import {
 	AddProduct,
@@ -9,6 +13,7 @@ import {
 	MainPage,
 	Product,
 } from './pages';
+import type { UserSession } from './types';
 import styled from 'styled-components';
 
 const AppColumn = styled.div`
@@ -20,6 +25,22 @@ const AppColumn = styled.div`
 `;
 
 export const Magazine = () => {
+	const dispatch = useAppDispatch();
+	useEffect(() => {
+		try {
+			const storedData = localStorage.getItem('userData');
+			if (storedData) {
+				const user: UserSession = JSON.parse(storedData);
+				sessions.add(user.session, user);
+				dispatch(setUser(user));
+			}
+		} catch (error) {
+			console.log(error);
+			localStorage.removeItem('userData');
+		}
+
+	}, [])
+
 	return (
 		<AppColumn>
 			<Header />

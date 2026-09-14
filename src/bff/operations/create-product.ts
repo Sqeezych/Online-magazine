@@ -1,17 +1,11 @@
 import { addProduct } from '../api';
 import { sessions } from '../sessions.js';
 import { ROLES } from '../constants/index.js';
+import { getErrorMessage } from '../utils';
+import type { ServerResponse } from '../types';
+import type { ProductDataType } from '../api';
 
-interface ProductDataType {
-	category: string;
-	count: string;
-	description: string;
-	image: string;
-	name: string;
-	price: string;
-}
-
-export const createProduct = async (userSession: string, productData: ProductDataType) => {
+export const createProduct = async (userSession: string, productData: ProductDataType): Promise<ServerResponse<string>> => {
 	const accessRoles = [ROLES.ADMIN];
 
 	if (!sessions.checkAccess(userSession, accessRoles)) {
@@ -28,7 +22,7 @@ export const createProduct = async (userSession: string, productData: ProductDat
 		};
 	} catch (error) {
 		return {
-			error: error.message,
+			error: getErrorMessage(error),
 			res: null,
 		};
 	}

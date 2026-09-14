@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 interface AccessErrorProps {
-	className: string
+	className?: string
 }
 
 const AccessErrorContainer = ({ className }: AccessErrorProps) => {

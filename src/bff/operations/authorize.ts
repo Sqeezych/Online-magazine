@@ -1,25 +1,10 @@
 import { getUser } from '../api/index.js';
 import { sessions } from '../sessions.js';
-import { ROLES } from '../constants';
+import { getErrorMessage } from '../utils';
+import type { ServerResponse } from '../types';
+import type { UserSession } from '../../types';
 
-interface AuthorizeProps {
-	authLogin: string;
-	authPassword: string;
-}
-
-interface Response {
-	id: string,
-	login: string,
-	roleId: typeof ROLES[keyof typeof ROLES],
-	session: string,
-}
-
-interface AuthorizeReturn {
-	error: string | null;
-	res: null | Response;
-}
-
-export const authorize = async ({authLogin, authPassword}: AuthorizeProps): AuthorizeReturn => {
+export const authorize = async (authLogin: string, authPassword: string): Promise<ServerResponse<UserSession>> => {
 	try {
 		const user = await getUser(authLogin);
 
@@ -36,8 +21,14 @@ export const authorize = async ({authLogin, authPassword}: AuthorizeProps): Auth
 				res: null,
 			};
 		}
+		const userForSession = {
+			id: user.id,
+			login: user.login,
+			roleId: user.roleId,
+			registeredAt: user.registeredAt,
+		}
 
-		const session = sessions.create(user);
+		const session = sessions.create(userForSession);
 
 		return {
 			error: null,
@@ -45,10 +36,15 @@ export const authorize = async ({authLogin, authPassword}: AuthorizeProps): Auth
 				id: user.id,
 				login: user.login,
 				roleId: user.roleId,
+				registeredAt: user.registeredAt,
 				session,
 			},
 		};
 	} catch (error) {
-		throw new Error('Ошибка при авторизации. Попробуйте позже');
+
+		return {
+			error: getErrorMessage(error),
+			res: null,
+		}
 	}
 };

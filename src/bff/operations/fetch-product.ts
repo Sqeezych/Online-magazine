@@ -1,17 +1,20 @@
 import { getProduct } from '../api';
+import { getErrorMessage } from '../utils';
+import type { Product } from '../../types';
+import type { ServerResponse } from '../types';
 
-export const fetchProduct = async (productId) => {
-	let URL = 'http://localhost:3000/products' + '/' + productId;
+export const fetchProduct = async (productId: string): Promise<ServerResponse<Product>> => {
+	const URL = `http://localhost:3000/products/${productId}`;
 
 	try {
-		const productFromServer = await getProduct(URL);
+		const product = await getProduct(URL);
 		return {
 			error: null,
-			res: productFromServer,
+			res: product,
 		};
 	} catch (error) {
 		return {
-			error: error.message,
+			error: getErrorMessage(error),
 			res: null,
 		};
 	}

@@ -1,32 +1,32 @@
-interface ProductDataType {
-	category: string;
-	count: string;
-	description: string;
-	image: string;
+export interface ProductDataType {
 	name: string;
+	categoryId: string;
 	price: string;
-}
+	count: string;
+	imageUrl: string;
+	description: string;
+};
 
 export const addProduct = async ({
 	name,
-	category,
+	categoryId,
 	price,
 	count,
-	image,
+	imageUrl,
 	description,
-}: ProductDataType) => {
+}: ProductDataType): Promise<void> => {
 	const response = await fetch('http://localhost:3000/products', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
 		},
 		body: JSON.stringify({
-			image_url: image,
+			image_url: imageUrl,
 			name: name,
 			description: description,
 			price: Number(price),
 			count: Number(count),
-			category_id: Number(category),
+			category_id: Number(categoryId),
 		}),
 	});
 

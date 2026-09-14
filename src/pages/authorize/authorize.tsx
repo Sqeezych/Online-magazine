@@ -1,12 +1,14 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '../../hooks';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { setUser } from '../../actions';
-import { OPERATIONS, ROLES } from '../../constants';
+import { setUser } from '../../store/reducers';
+import { OPERATIONS } from '../../constants';
 import { authFormSchema } from './schema';
 import { useServerRequest } from '../../hooks';
+import { getErrorMessage } from '../../bff/utils';
+import type { AuthFormData } from './schema';
 import styled from 'styled-components';
 
 const Form = styled.form`
@@ -56,14 +58,14 @@ const ErrorContainer = styled.div`
 	text-align: center;
 `;
 
-interface AccessErrorProps {
-	className: string
+interface AuthorizeProps {
+	className?: string
 }
 
-const AuthorizeContainer = ({ className }: AccessErrorProps) => {
+const AuthorizeContainer = ({ className }: AuthorizeProps) => {
 	const [serverError, setServerError] = useState<string | null>(null);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 	const requestServer = useServerRequest();
 
@@ -72,7 +74,7 @@ const AuthorizeContainer = ({ className }: AccessErrorProps) => {
 		reset,
 		handleSubmit,
 		formState: { errors },
-	} = useForm({
+	} = useForm<AuthFormData>({
 		defaultValues: {
 			login: '',
 			password: '',
@@ -80,13 +82,13 @@ const AuthorizeContainer = ({ className }: AccessErrorProps) => {
 		resolver: yupResolver(authFormSchema),
 	});
 
-	const onSubmit = ({ login, password }: { login: string, password: string}) => {
+	const onSubmit = ({ login, password }: AuthFormData) => {
 		setIsLoading(true);
 		requestServer(OPERATIONS.AUTHORIZE, login, password)
 			.then(({ error, res }) => {
 				if (error) {
 					setServerError(error);
-				} else {
+				} else if (!error && res) {
 					setServerError(null);
 					dispatch(setUser(res));
 					localStorage.setItem('userData', JSON.stringify(res));
@@ -95,7 +97,7 @@ const AuthorizeContainer = ({ className }: AccessErrorProps) => {
 				}
 			})
 			.catch((error) => {
-				setServerError(error.message);
+				setServerError(getErrorMessage(error));
 			})
 			.finally(() => setIsLoading(false));
 	};
@@ -124,7 +126,7 @@ const AuthorizeContainer = ({ className }: AccessErrorProps) => {
 				<FormButton
 					className="content-filter-button"
 					type="submit"
-					disabled={validationError || isLoading}
+					disabled={!!validationError || isLoading}
 				>
 					Войти
 				</FormButton>
